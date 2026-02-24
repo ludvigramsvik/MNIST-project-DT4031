@@ -15,9 +15,5 @@ def standard_deviation(data):
 
 # the most extreme outlier
 def outlier(data):
-    mean = total_mean(data)
-    outlier = 0
-    for i in data:
-        if np.square(sample_mean(i)) + np.square(mean) > outlier:
-            outlier = i
-    return outlier
+    mean = np.mean(data)
+    return np.argmax((data - mean) ** 2)
