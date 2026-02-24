@@ -12,3 +12,9 @@ def variance(data):
 # standard deviation
 def standard_deviation(data):
     return np.sqrt(variance(data))
+
+# the most extreme outlier
+def outlier(data):
+    mean = sample_mean(data)
+    std_dev = standard_deviation(data)
+    return np.sum(np.abs(data - mean) > 3 * std_dev)
