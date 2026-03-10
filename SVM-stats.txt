@@ -1,0 +1,14 @@
+Kernel:	 RBF
+C:	 1.0
+Gamma:	 scale
+Accuracy: 0.97230000
+
+Kernel:	 poly
+C:	 1.0
+Gamma:	 scale
+Accuracy: 0.97070000
+
+Kernel:	 sigmoid
+C:	 1.0
+Gamma:	 scale
+Accuracy: 0.62290000
