@@ -1,10 +1,25 @@
-# MNIST Digit Sketch — WinForms
+# MNIST-project-DT4031
 
-Draw digits with your mouse and see **live** neural-network predictions. This desktop app loads your trained MNIST model as **ONNX** and runs it with [ONNX Runtime](https://onnxruntime.ai/) — no Python required to use the published build.
+DT4031 coursework: MNIST with neural networks, SVM, visualizations, and a small **Windows** sketch app for live digit classification.
+
+## Releases
+
+Prebuilt **MnistDrawGui** builds (zip of your `publish` folder) live on GitHub:
+
+- **[All releases](https://github.com/ludvigramsvik/MNIST-project-DT4031/releases)**  
+- **[Latest release](https://github.com/ludvigramsvik/MNIST-project-DT4031/releases/latest)** — download the attached `.zip`, unzip, run `MnistDrawGui.exe` (see requirements below).
+
+*Creating a release:* on GitHub go to **Releases → Draft a new release**, choose a tag (e.g. `v1.0.0`), paste notes from [`MnistDrawGui/RELEASE_NOTES.md`](MnistDrawGui/RELEASE_NOTES.md), and upload your zip as a release asset.
+
+More detail: [`MnistDrawGui/README.md`](MnistDrawGui/README.md).
 
 ---
 
-## Highlights
+## MNIST Digit Sketch (WinForms)
+
+Draw digits with your mouse and see **live** neural-network predictions. This desktop app loads your trained MNIST model as **ONNX** and runs it with [ONNX Runtime](https://onnxruntime.ai/) — no Python required to use the published build.
+
+### Highlights
 
 - **Smooth drawing** — Anti-aliased strokes on a **black** canvas so preprocessed input matches MNIST-style images (dark background, bright digit).
 - **Real-time inference** — Probabilities and the top digit update continuously while you draw; no “Predict” button.
@@ -13,7 +28,7 @@ Draw digits with your mouse and see **live** neural-network predictions. This de
 
 ---
 
-## Requirements (prebuilt `publish` folder)
+### Requirements (prebuilt `publish` folder)
 
 | Requirement | Notes |
 |-------------|--------|
