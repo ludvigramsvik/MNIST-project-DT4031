@@ -1,11 +1,9 @@
 # https://github.com/github-linguist/linguist/blob/master/docs/overrides.md
 # Refreshes after you push; the language bar can take a few minutes to update.
 
-# C# application source — keep in language statistics
+# Application source — keep in language statistics
 *.cs linguist-detectable=true
-*.ipynb linguist-detectable=true
 *.py linguist-detectable=true
-*.cs linguist-detectable=true
 *.csproj linguist-detectable=true
 *.props linguist-detectable=true
 *.targets linguist-detectable=true
@@ -14,3 +12,6 @@
 *.yaml linguist-detectable=true
 *.yml linguist-detectable=true
 *.txt linguist-detectable=true
+
+# Exclude Jupyter Notebooks from language stats to prevent skewing
+*.ipynb linguist-detectable=false
