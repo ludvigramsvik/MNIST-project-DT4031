@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "GrZvq9se4oU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\0404l\\.nuget\\packages\\microsoft.ml.onnxruntime\\1.19.2\\microsoft.ml.onnxruntime.1.19.2.nupkg.sha512",
+    "C:\\Users\\0404l\\.nuget\\packages\\microsoft.ml.onnxruntime.managed\\1.19.2\\microsoft.ml.onnxruntime.managed.1.19.2.nupkg.sha512",
+    "C:\\Users\\0404l\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512"
+  ],
+  "logs": []
+}
