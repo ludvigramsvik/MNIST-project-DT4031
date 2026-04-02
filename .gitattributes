@@ -3,3 +3,14 @@
 
 # C# application source — keep in language statistics
 *.cs linguist-detectable=true
+*.ipynb linguist-detectable=true
+*.py linguist-detectable=true
+*.cs linguist-detectable=true
+*.csproj linguist-detectable=true
+*.props linguist-detectable=true
+*.targets linguist-detectable=true
+*.md linguist-detectable=true
+*.json linguist-detectable=true
+*.yaml linguist-detectable=true
+*.yml linguist-detectable=true
+*.txt linguist-detectable=true
