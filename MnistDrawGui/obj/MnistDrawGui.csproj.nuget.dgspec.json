@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj": {}
+    "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj": {}
   },
   "projects": {
-    "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj": {
+    "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
+        "projectUniqueName": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
         "projectName": "MnistDrawGui",
-        "projectPath": "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
+        "projectPath": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
         "packagesPath": "C:\\Users\\0404l\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\obj\\",
+        "outputPath": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -66,6 +66,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[8.0.16, 8.0.16]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[8.0.16, 8.0.16]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[8.0.16, 8.0.16]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -75,6 +89,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }
