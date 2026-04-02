@@ -14,4 +14,6 @@
 *.txt linguist-detectable=true
 
 # Exclude Jupyter Notebooks from language stats to prevent skewing
+# Force JSON files to be categorized as Jupyter Notebooks
+*.json linguist-language=Jupyter-Notebook
 *.ipynb linguist-detectable=false
