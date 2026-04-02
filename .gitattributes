@@ -3,16 +3,3 @@
 
 # C# application source — keep in language statistics
 *.cs linguist-detectable=true
-
-# Small MSBuild/XML project files — don’t show as a separate “XML” slice
-*.csproj linguist-generated
-*.props linguist-generated
-*.targets linguist-generated
-
-# Notebooks are JSON with huge embedded outputs (plots, base64). They dominate bytes
-# and hide Python/C#. Mark as generated so the bar reflects .py and .cs fairly.
-# Delete this line if you prefer Jupyter to appear in the language breakdown.
-*.ipynb linguist-generated
-
-# Markdown is documentation, not program code
-*.md linguist-documentation
