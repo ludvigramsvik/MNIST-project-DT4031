@@ -88,20 +88,20 @@ public sealed class MainForm : Form
         header.Controls.Add(_predictionLabel);
         header.Controls.Add(_statusLabel);
 
-        var split = new SplitContainer
+        // TableLayoutPanel avoids SplitContainer's SplitterDistance layout exceptions on first paint / Win32 / DPI.
+        var body = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
-            Orientation = Orientation.Vertical,
-            SplitterWidth = 8,
-            Panel1MinSize = 320,
-            Panel2MinSize = 280,
-            SplitterDistance = 480,
+            ColumnCount = 2,
+            RowCount = 1,
             BackColor = Color.FromArgb(35, 35, 42)
         };
+        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 56f));
+        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44f));
 
-        var pad = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 0, 8, 0), BackColor = BackColor };
+        var pad = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 0, 10, 0), BackColor = BackColor };
         pad.Controls.Add(_canvas);
-        split.Panel1.Controls.Add(pad);
+        body.Controls.Add(pad, 0, 0);
 
         var right = new TableLayoutPanel
         {
@@ -124,10 +124,10 @@ public sealed class MainForm : Form
         right.Controls.Add(hint, 0, 0);
         right.Controls.Add(_probPanel, 0, 1);
 
-        split.Panel2.Controls.Add(right);
+        body.Controls.Add(right, 1, 0);
 
         root.Controls.Add(header, 0, 0);
-        root.Controls.Add(split, 0, 1);
+        root.Controls.Add(body, 0, 1);
         Controls.Add(root);
 
         _predictTimer = new System.Windows.Forms.Timer { Interval = 45 };

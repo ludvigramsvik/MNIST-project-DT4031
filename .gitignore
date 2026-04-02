@@ -1,0 +1,30 @@
+# Visual Studio / VS Code
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET build output
+**/bin/
+**/obj/
+**/publish/
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Large / local ML artifacts (uncomment if you do not want them in Git)
+# *.keras
+# *.onnx
+# MNIST_dataset/

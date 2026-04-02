@@ -36,3 +36,4 @@ c:\Users\0404l\Documents\GitHub\MNIST-project-DT4031\MnistDrawGui\obj\Release\ne
 c:\Users\0404l\Documents\GitHub\MNIST-project-DT4031\MnistDrawGui\obj\Release\net8.0-windows\MnistDrawGui.pdb
 c:\Users\0404l\Documents\GitHub\MNIST-project-DT4031\MnistDrawGui\obj\Release\net8.0-windows\MnistDrawGui.genruntimeconfig.cache
 c:\Users\0404l\Documents\GitHub\MNIST-project-DT4031\MnistDrawGui\obj\Release\net8.0-windows\ref\MnistDrawGui.dll
+C:\Users\0404l\Documents\GitHub\MNIST-project-DT4031\MnistDrawGui\bin\Release\net8.0-windows\mnist_model.onnx

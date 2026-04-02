@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MnistDrawGui")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+649400f4510e6ef9179b92ac0684cc8272f078df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af9aa81c2b34c124a24997e9124a064a0f8986bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MnistDrawGui")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MnistDrawGui")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

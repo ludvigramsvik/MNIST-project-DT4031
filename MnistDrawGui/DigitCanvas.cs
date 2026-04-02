@@ -10,8 +10,9 @@ public sealed class DigitCanvas : Control
     private Bitmap? _buffer;
     private Point? _lastPoint;
     private bool _drawing;
-    private readonly Color _paper = Color.FromArgb(18, 18, 22);
-    private readonly Color _ink = Color.FromArgb(245, 245, 250);
+    // Match MNIST: background 0, foreground ~1 after /255 (training used float32 / 255).
+    private readonly Color _paper = Color.Black;
+    private readonly Color _ink = Color.White;
 
     public event EventHandler? StrokesChanged;
 
@@ -57,7 +58,7 @@ public sealed class DigitCanvas : Control
     }
 
     /// <summary>
-    /// Downsamples the canvas to 28×28, luminance in [0,1] (white stroke on dark bg).
+    /// Downsamples the canvas to 28×28, luminance in [0,1] (same convention as MNIST: black bg, bright digit).
     /// </summary>
     public float[,] ToMnistGrid28()
     {
@@ -80,9 +81,9 @@ public sealed class DigitCanvas : Control
         for (var x = 0; x < 28; x++)
         {
             var c = small.GetPixel(x, y);
-            // perceived luminance
+            // Grayscale luminance; MNIST is single-channel — R=G=B for our white-on-black buffer.
             var lum = (0.299f * c.R + 0.587f * c.G + 0.114f * c.B) / 255f;
-            grid[y, x] = lum;
+            grid[y, x] = Math.Clamp(lum, 0f, 1f);
         }
 
         return grid;
