@@ -60,21 +60,14 @@ def _keras_to_onnx(model: object, spec: tuple, opset: int):
     import tensorflow as tf
     import tf2onnx
 
-    def wrap(m) -> tf.keras.Model:
-        inp = tf.keras.Input(shape=(28, 28, 1), name="input", dtype=tf.float32)
-        out = m(inp, training=False)
-        return tf.keras.Model(inputs=inp, outputs=out, name="mnist_onnx_export")
-
-    wrapped = wrap(model)
-
     try:
-        return tf2onnx.convert.from_keras(wrapped, input_signature=spec, opset=opset)
+        return tf2onnx.convert.from_keras(model, input_signature=spec, opset=opset)
     except KeyError:
         pass
 
     tmp = tempfile.mkdtemp(suffix="_sm")
     try:
-        tf.saved_model.save(wrapped, tmp)
+        tf.saved_model.save(model, tmp)
         return tf2onnx.convert.from_saved_model(
             tmp,
             opset=opset,
@@ -82,6 +75,62 @@ def _keras_to_onnx(model: object, spec: tuple, opset: int):
         )
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
+
+
+def _build_viz_model(inner):
+    """
+    Forward pass with extra outputs after Dense / Conv2D (conv uses channel means) for the WinForms NN view.
+    Final tensor is always exported as NN_output (N = sort order) so the app can find the 10-class head.
+    """
+    import tensorflow as tf
+    from collections import OrderedDict
+    from tensorflow.keras.layers import InputLayer
+
+    inp = tf.keras.Input(shape=(28, 28, 1), dtype=tf.float32, name="input")
+    x = inp
+    outputs: OrderedDict[str, tf.Tensor] = OrderedDict()
+    idx = 0
+
+    def skip_hidden_viz(layer) -> bool:
+        cn = layer.__class__.__name__
+        if "Random" in cn or "Augmentation" in cn:
+            return True
+        if isinstance(
+            layer,
+            (
+                tf.keras.layers.Dropout,
+                tf.keras.layers.Flatten,
+                tf.keras.layers.MaxPooling2D,
+                tf.keras.layers.AveragePooling2D,
+                tf.keras.layers.BatchNormalization,
+                tf.keras.layers.Add,
+                tf.keras.layers.Multiply,
+            ),
+        ):
+            return True
+        return False
+
+    layer_list = [layer for layer in inner.layers if not isinstance(layer, InputLayer)]
+    for li, layer in enumerate(layer_list):
+        x = layer(x)
+        is_last = li == len(layer_list) - 1
+        if is_last:
+            outputs[f"{idx:02d}_output"] = x
+            break
+        if skip_hidden_viz(layer):
+            continue
+        safe = (layer.name or "layer").replace("/", "_")[:48]
+        if isinstance(layer, tf.keras.layers.Dense):
+            outputs[f"{idx:02d}_dense_{safe}"] = x
+            idx += 1
+        elif isinstance(layer, tf.keras.layers.Conv2D):
+            outputs[f"{idx:02d}_conv_{safe}"] = tf.reduce_mean(x, axis=[1, 2])
+            idx += 1
+        elif isinstance(layer, tf.keras.layers.Activation):
+            outputs[f"{idx:02d}_act_{safe}"] = x
+            idx += 1
+
+    return tf.keras.Model(inputs=inp, outputs=outputs, name="mnist_viz_export")
 
 
 def main() -> None:
@@ -106,9 +155,10 @@ def main() -> None:
 
     print(f"Loading Keras model: {in_path}")
     model = tf.keras.models.load_model(in_path)
+    viz_model = _build_viz_model(model)
     spec = (tf.TensorSpec((None, 28, 28, 1), tf.float32, name="input"),)
 
-    model_proto, _ = _keras_to_onnx(model, spec, opset=13)
+    model_proto, _ = _keras_to_onnx(viz_model, spec, opset=13)
     with open(out_path, "wb") as f:
         f.write(model_proto.SerializeToString())
 

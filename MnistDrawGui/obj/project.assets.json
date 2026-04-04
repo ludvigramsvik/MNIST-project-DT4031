@@ -122,52 +122,6 @@
           "lib/netcoreapp2.1/_._": {}
         }
       }
-    },
-    "net8.0-windows7.0/win-x64": {
-      "Microsoft.ML.OnnxRuntime/1.19.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.ML.OnnxRuntime.Managed": "1.19.2"
-        },
-        "native": {
-          "runtimes/win-x64/native/onnxruntime.dll": {},
-          "runtimes/win-x64/native/onnxruntime.lib": {},
-          "runtimes/win-x64/native/onnxruntime_providers_shared.dll": {},
-          "runtimes/win-x64/native/onnxruntime_providers_shared.lib": {}
-        },
-        "build": {
-          "build/netstandard2.1/Microsoft.ML.OnnxRuntime.props": {},
-          "build/netstandard2.1/Microsoft.ML.OnnxRuntime.targets": {}
-        }
-      },
-      "Microsoft.ML.OnnxRuntime.Managed/1.19.2": {
-        "type": "package",
-        "dependencies": {
-          "System.Memory": "4.5.5"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.ML.OnnxRuntime.dll": {
-            "related": ".pdb"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.ML.OnnxRuntime.dll": {
-            "related": ".pdb"
-          }
-        },
-        "build": {
-          "build/netstandard2.0/Microsoft.ML.OnnxRuntime.Managed.targets": {}
-        }
-      },
-      "System.Memory/4.5.5": {
-        "type": "package",
-        "compile": {
-          "ref/netcoreapp2.1/_._": {}
-        },
-        "runtime": {
-          "lib/netcoreapp2.1/_._": {}
-        }
-      }
     }
   },
   "libraries": {
@@ -291,11 +245,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
+      "projectUniqueName": "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
       "projectName": "MnistDrawGui",
-      "projectPath": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
+      "projectPath": "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\MnistDrawGui.csproj",
       "packagesPath": "C:\\Users\\0404l\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\obj\\",
+      "outputPath": "c:\\Users\\0404l\\Documents\\GitHub\\MNIST-project-DT4031\\MnistDrawGui\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -350,20 +304,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[8.0.16, 8.0.16]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[8.0.16, 8.0.16]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[8.0.16, 8.0.16]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -373,11 +313,6 @@
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
-      }
-    },
-    "runtimes": {
-      "win-x64": {
-        "#import": []
       }
     }
   }

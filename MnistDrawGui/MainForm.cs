@@ -6,6 +6,7 @@ public sealed class MainForm : Form
 {
     private readonly DigitCanvas _canvas = new() { Dock = DockStyle.Fill };
     private readonly ProbabilityPanel _probPanel = new() { Dock = DockStyle.Fill };
+    private readonly NetworkVisualizationPanel _vizPanel = new() { Dock = DockStyle.Fill };
     private readonly Label _predictionLabel = new();
     private readonly Label _statusLabel = new();
     private readonly System.Windows.Forms.Timer _predictTimer;
@@ -16,7 +17,7 @@ public sealed class MainForm : Form
     {
         Text = "MNIST digit sketch — live prediction";
         StartPosition = FormStartPosition.CenterScreen;
-        MinimumSize = new Size(820, 560);
+        MinimumSize = new Size(1020, 580);
         BackColor = Color.FromArgb(22, 22, 26);
         Font = new Font("Segoe UI", 10f);
 
@@ -51,7 +52,11 @@ public sealed class MainForm : Form
             Cursor = Cursors.Hand
         };
         btnClear.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 90);
-        btnClear.Click += (_, _) => _canvas.ClearCanvas();
+        btnClear.Click += (_, _) =>
+        {
+            _canvas.ClearCanvas();
+            _vizPanel.Clear();
+        };
 
         var btnOpenModel = new Button
         {
@@ -92,12 +97,13 @@ public sealed class MainForm : Form
         var body = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
-            ColumnCount = 2,
+            ColumnCount = 3,
             RowCount = 1,
             BackColor = Color.FromArgb(35, 35, 42)
         };
-        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 56f));
-        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44f));
+        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 46f));
+        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 26f));
+        body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28f));
 
         var pad = new Panel { Dock = DockStyle.Fill, Padding = new Padding(0, 0, 10, 0), BackColor = BackColor };
         pad.Controls.Add(_canvas);
@@ -125,6 +131,27 @@ public sealed class MainForm : Form
         right.Controls.Add(_probPanel, 0, 1);
 
         body.Controls.Add(right, 1, 0);
+
+        var vizWrap = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            RowCount = 2,
+            ColumnCount = 1,
+            BackColor = BackColor
+        };
+        vizWrap.RowStyles.Add(new RowStyle(SizeType.Absolute, 36));
+        vizWrap.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        var vizHint = new Label
+        {
+            Dock = DockStyle.Fill,
+            Text = "Network activity (neuron brightness ∝ activation)",
+            ForeColor = Color.DarkGray,
+            TextAlign = ContentAlignment.BottomLeft,
+            Padding = new Padding(0, 0, 0, 4)
+        };
+        vizWrap.Controls.Add(vizHint, 0, 0);
+        vizWrap.Controls.Add(_vizPanel, 0, 1);
+        body.Controls.Add(vizWrap, 2, 0);
 
         root.Controls.Add(header, 0, 0);
         root.Controls.Add(body, 0, 1);
@@ -184,6 +211,23 @@ public sealed class MainForm : Form
 
     private void SetStatus(string msg) => _statusLabel.Text = msg;
 
+    /// <summary>7×7 downsample of the 28×28 drawing for the leftmost “input” column.</summary>
+    private static float[] BuildInputPreview(float[,] g)
+    {
+        var r = new float[49];
+        var i = 0;
+        for (var by = 0; by < 7; by++)
+        for (var bx = 0; bx < 7; bx++)
+        {
+            var sum = 0f;
+            for (var dy = 0; dy < 4; dy++)
+            for (var dx = 0; dx < 4; dx++)
+                sum += g[by * 4 + dy, bx * 4 + dx];
+            r[i++] = sum / 16f;
+        }
+        return r;
+    }
+
     private void OpenModel_Click(object? sender, EventArgs e)
     {
         using var dlg = new OpenFileDialog
@@ -214,10 +258,13 @@ public sealed class MainForm : Form
             {
                 _predictionLabel.Text = "Prediction: —";
                 _probPanel.SetProbabilities(new float[10]);
+                _vizPanel.Clear();
                 return;
             }
 
-            var raw = _session.Predict(grid);
+            var full = _session.PredictFull(grid);
+            _vizPanel.SetActivations(BuildInputPreview(grid), full.LayerColumns);
+            var raw = full.ClassOutput;
             if (raw.Length != 10)
             {
                 SetStatus($"Model output length {raw.Length}; expected 10.");
